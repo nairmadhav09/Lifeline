@@ -1,0 +1,328 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+   Lifeline design tokens
+   Light is the default and the design priority; dark mirrors the same
+   token names so components never hard-code a color.
+------------------------------------------------------------------- */
+:root {
+  --radius: 0.75rem; /* rounded-xl for inputs & buttons; cards use rounded-2xl */
+
+  /* Surfaces */
+  --background: #fafafb;
+  --foreground: #0f172a; /* slate-900 — headings */
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Text ramp */
+  --text-body: #475569; /* slate-600 */
+  --text-meta: #5b6b82; /* ≥4.5:1 on white, page, muted and accent surfaces (WCAG AA) */
+  --text-faint: #94a3b8; /* slate-400 — decorative only, never body copy */
+
+  /* Brand (gradient used only on primary CTA, AI surfaces, active states) */
+  --brand-from: #4f46e5; /* indigo-600 */
+  --brand-to: #8b5cf6; /* violet-500 */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #5b6b82;
+  --accent: #eef2ff; /* indigo-50: hover / active nav */
+  --accent-foreground: #3730a3; /* indigo-800 */
+  --destructive: #e11d48;
+  --destructive-foreground: #ffffff;
+
+  --border: rgb(226 232 240 / 0.6); /* slate-200/60 */
+  --input: #e2e8f0;
+  --ring: rgb(99 102 241 / 0.55);
+
+  /* Page wash */
+  --wash-1: #eef2ff; /* indigo-50 */
+  --wash-2: #f5f3ff; /* violet-50 */
+
+  /* Status pills: -50 background, -700 text */
+  --status-paid-bg: #ecfdf5;
+  --status-paid-fg: #047857;
+  --status-due-soon-bg: #fffbeb;
+  --status-due-soon-fg: #b45309;
+  --status-overdue-bg: #fff1f2;
+  --status-overdue-fg: #be123c;
+  --status-upcoming-bg: #f1f5f9;
+  --status-upcoming-fg: #334155;
+  --status-skipped-bg: #f8fafc;
+  --status-skipped-fg: #64748b;
+
+  /* Category chips: muted pastels, never saturated */
+  --cat-indigo-bg: #eef2ff;
+  --cat-indigo-fg: #4338ca;
+  --cat-sky-bg: #f0f9ff;
+  --cat-sky-fg: #0369a1;
+  --cat-teal-bg: #f0fdfa;
+  --cat-teal-fg: #0f766e;
+  --cat-emerald-bg: #ecfdf5;
+  --cat-emerald-fg: #047857;
+  --cat-amber-bg: #fffbeb;
+  --cat-amber-fg: #b45309;
+  --cat-orange-bg: #fff7ed;
+  --cat-orange-fg: #c2410c;
+  --cat-rose-bg: #fff1f2;
+  --cat-rose-fg: #be123c;
+  --cat-pink-bg: #fdf2f8;
+  --cat-pink-fg: #be185d;
+  --cat-violet-bg: #f5f3ff;
+  --cat-violet-fg: #6d28d9;
+  --cat-slate-bg: #f1f5f9;
+  --cat-slate-fg: #475569;
+
+  /* Charts */
+  /* Charts — validated with the dataviz palette checker (light, #fff surface).
+     accent = the series / emphasized mark; context = de-emphasized marks.
+     context is < 3:1 on white, so charts ship direct labels + a table view. */
+  --chart-accent: #4338ca;
+  --chart-context: #818cf8;
+  --chart-grid: #eef0f3;
+  --chart-axis: #cbd5e1;
+
+  /* Sidebar */
+  --sidebar: rgb(255 255 255 / 0.7);
+  --sidebar-foreground: #475569;
+  --sidebar-border: rgb(226 232 240 / 0.6);
+
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+  --shadow-pop: 0 4px 6px -2px rgba(16, 24, 40, 0.04), 0 12px 24px -4px rgba(16, 24, 40, 0.1);
+}
+
+.dark {
+  --background: #0b0d12;
+  --foreground: #f1f5f9;
+  --card: #12151c;
+  --card-foreground: #f1f5f9;
+  --popover: #151923;
+  --popover-foreground: #f1f5f9;
+
+  --text-body: #cbd5e1;
+  --text-meta: #94a3b8;
+  --text-faint: #64748b;
+
+  --brand-from: #6366f1;
+  --brand-to: #a78bfa;
+  --primary: #818cf8;
+  --primary-foreground: #0b0d12;
+
+  --secondary: #1c212c;
+  --secondary-foreground: #f1f5f9;
+  --muted: #1c212c;
+  --muted-foreground: #94a3b8;
+  --accent: rgb(99 102 241 / 0.14);
+  --accent-foreground: #c7d2fe;
+  --destructive: #fb7185;
+  --destructive-foreground: #0b0d12;
+
+  --border: rgb(148 163 184 / 0.14);
+  --input: rgb(148 163 184 / 0.22);
+  --ring: rgb(129 140 248 / 0.6);
+
+  --wash-1: rgb(79 70 229 / 0.12);
+  --wash-2: rgb(139 92 246 / 0.1);
+
+  --status-paid-bg: rgb(16 185 129 / 0.14);
+  --status-paid-fg: #6ee7b7;
+  --status-due-soon-bg: rgb(245 158 11 / 0.14);
+  --status-due-soon-fg: #fcd34d;
+  --status-overdue-bg: rgb(244 63 94 / 0.14);
+  --status-overdue-fg: #fda4af;
+  --status-upcoming-bg: rgb(148 163 184 / 0.14);
+  --status-upcoming-fg: #cbd5e1;
+  --status-skipped-bg: rgb(148 163 184 / 0.08);
+  --status-skipped-fg: #94a3b8;
+
+  --cat-indigo-bg: rgb(99 102 241 / 0.14);
+  --cat-indigo-fg: #a5b4fc;
+  --cat-sky-bg: rgb(14 165 233 / 0.14);
+  --cat-sky-fg: #7dd3fc;
+  --cat-teal-bg: rgb(20 184 166 / 0.14);
+  --cat-teal-fg: #5eead4;
+  --cat-emerald-bg: rgb(16 185 129 / 0.14);
+  --cat-emerald-fg: #6ee7b7;
+  --cat-amber-bg: rgb(245 158 11 / 0.14);
+  --cat-amber-fg: #fcd34d;
+  --cat-orange-bg: rgb(249 115 22 / 0.14);
+  --cat-orange-fg: #fdba74;
+  --cat-rose-bg: rgb(244 63 94 / 0.14);
+  --cat-rose-fg: #fda4af;
+  --cat-pink-bg: rgb(236 72 153 / 0.14);
+  --cat-pink-fg: #f9a8d4;
+  --cat-violet-bg: rgb(139 92 246 / 0.14);
+  --cat-violet-fg: #c4b5fd;
+  --cat-slate-bg: rgb(148 163 184 / 0.14);
+  --cat-slate-fg: #cbd5e1;
+
+  /* Dark chart steps, validated against the dark card surface (#12151c). */
+  --chart-accent: #8a92f9;
+  --chart-context: #5850e0;
+  --chart-grid: #1f2430;
+  --chart-axis: #3a4150;
+
+  --sidebar: rgb(18 21 28 / 0.7);
+  --sidebar-foreground: #cbd5e1;
+  --sidebar-border: rgb(148 163 184 / 0.12);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-pop: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-body: var(--text-body);
+  --color-meta: var(--text-meta);
+  --color-faint: var(--text-faint);
+  --color-brand-from: var(--brand-from);
+  --color-brand-to: var(--brand-to);
+
+  --color-status-paid: var(--status-paid-fg);
+  --color-status-paid-bg: var(--status-paid-bg);
+  --color-status-due-soon: var(--status-due-soon-fg);
+  --color-status-due-soon-bg: var(--status-due-soon-bg);
+  --color-status-overdue: var(--status-overdue-fg);
+  --color-status-overdue-bg: var(--status-overdue-bg);
+  --color-status-upcoming: var(--status-upcoming-fg);
+  --color-status-upcoming-bg: var(--status-upcoming-bg);
+  --color-status-skipped: var(--status-skipped-fg);
+  --color-status-skipped-bg: var(--status-skipped-bg);
+
+  --color-chart-accent: var(--chart-accent);
+  --color-chart-context: var(--chart-context);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis: var(--chart-axis);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: calc(var(--radius) + 4px);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-pop: var(--shadow-pop);
+
+  /* Type scale */
+  --text-page-title: 1.75rem;
+  --text-page-title--line-height: 2rem;
+  --text-page-title--font-weight: 600;
+  --text-page-title--letter-spacing: -0.015em;
+  --text-section: 1rem;
+  --text-section--line-height: 1.5rem;
+  --text-section--font-weight: 600;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-sm text-body;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-foreground;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+------------------------------------------------------------------- */
+
+/* Soft radial wash at the top of the page */
+@utility bg-page-wash {
+  background-image:
+    radial-gradient(60rem 28rem at 0% -10%, var(--wash-1), transparent 65%),
+    radial-gradient(48rem 24rem at 100% -5%, var(--wash-2), transparent 60%);
+  background-repeat: no-repeat;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-to));
+}
+
+@utility text-brand-gradient {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Base card surface */
+@utility surface {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow-card);
+}
+
+/* AI surfaces: subtle gradient hairline border, recognisable but quiet */
+@utility ai-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(135deg, rgb(99 102 241 / 0.45), rgb(139 92 246 / 0.25), rgb(226 232 240 / 0.6))
+      border-box;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

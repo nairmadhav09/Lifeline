@@ -1,0 +1,187 @@
+import type { Recurrence } from "@/types/domain";
+
+/** Common obligations offered as a checklist during onboarding. */
+export type Preset = {
+  id: string;
+  title: string;
+  /** Must match a default category name. */
+  category: string;
+  icon: string;
+  color: string;
+  recurrence: Recurrence;
+  dueDay: number;
+  dueMonth?: number;
+  variable?: boolean;
+};
+
+export const PRESETS: Preset[] = [
+  {
+    id: "rent",
+    title: "Rent",
+    category: "Housing",
+    icon: "house",
+    color: "indigo",
+    recurrence: "monthly",
+    dueDay: 1,
+  },
+  {
+    id: "mortgage",
+    title: "Mortgage",
+    category: "Housing",
+    icon: "house",
+    color: "indigo",
+    recurrence: "monthly",
+    dueDay: 1,
+  },
+  {
+    id: "electricity",
+    title: "Electricity",
+    category: "Utilities",
+    icon: "zap",
+    color: "amber",
+    recurrence: "monthly",
+    dueDay: 15,
+    variable: true,
+  },
+  {
+    id: "water",
+    title: "Water",
+    category: "Utilities",
+    icon: "zap",
+    color: "amber",
+    recurrence: "monthly",
+    dueDay: 20,
+    variable: true,
+  },
+  {
+    id: "gas",
+    title: "Gas / heating",
+    category: "Utilities",
+    icon: "zap",
+    color: "amber",
+    recurrence: "monthly",
+    dueDay: 18,
+    variable: true,
+  },
+  {
+    id: "internet",
+    title: "Internet",
+    category: "Utilities",
+    icon: "wifi",
+    color: "amber",
+    recurrence: "monthly",
+    dueDay: 10,
+  },
+  {
+    id: "phone",
+    title: "Phone",
+    category: "Utilities",
+    icon: "phone",
+    color: "amber",
+    recurrence: "monthly",
+    dueDay: 12,
+  },
+  {
+    id: "health-insurance",
+    title: "Health insurance",
+    category: "Insurance",
+    icon: "shield-check",
+    color: "teal",
+    recurrence: "monthly",
+    dueDay: 1,
+  },
+  {
+    id: "car-insurance",
+    title: "Car insurance",
+    category: "Insurance",
+    icon: "car",
+    color: "teal",
+    recurrence: "monthly",
+    dueDay: 15,
+  },
+  {
+    id: "home-insurance",
+    title: "Home / renters insurance",
+    category: "Insurance",
+    icon: "shield-check",
+    color: "teal",
+    recurrence: "yearly",
+    dueDay: 1,
+    dueMonth: 1,
+  },
+  {
+    id: "property-tax",
+    title: "Property tax",
+    category: "Taxes",
+    icon: "landmark",
+    color: "rose",
+    recurrence: "half_yearly",
+    dueDay: 10,
+    dueMonth: 4,
+  },
+  {
+    id: "income-tax",
+    title: "Income tax estimate",
+    category: "Taxes",
+    icon: "landmark",
+    color: "rose",
+    recurrence: "quarterly",
+    dueDay: 15,
+    dueMonth: 1,
+  },
+  {
+    id: "car-loan",
+    title: "Car loan",
+    category: "Loans & EMIs",
+    icon: "hand-coins",
+    color: "orange",
+    recurrence: "monthly",
+    dueDay: 5,
+  },
+  {
+    id: "student-loan",
+    title: "Student loan",
+    category: "Loans & EMIs",
+    icon: "hand-coins",
+    color: "orange",
+    recurrence: "monthly",
+    dueDay: 25,
+  },
+  {
+    id: "credit-card",
+    title: "Credit card",
+    category: "Credit Cards",
+    icon: "credit-card",
+    color: "sky",
+    recurrence: "monthly",
+    dueDay: 20,
+    variable: true,
+  },
+  {
+    id: "streaming",
+    title: "Streaming",
+    category: "Subscriptions",
+    icon: "tv",
+    color: "violet",
+    recurrence: "monthly",
+    dueDay: 3,
+  },
+  {
+    id: "music",
+    title: "Music",
+    category: "Subscriptions",
+    icon: "repeat",
+    color: "violet",
+    recurrence: "monthly",
+    dueDay: 7,
+  },
+  {
+    id: "gym",
+    title: "Gym",
+    category: "Healthcare",
+    icon: "dumbbell",
+    color: "pink",
+    recurrence: "monthly",
+    dueDay: 1,
+  },
+];
