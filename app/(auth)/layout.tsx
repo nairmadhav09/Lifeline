@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -7,8 +8,20 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <Logo />
       </header>
       <main className="flex flex-1 items-start justify-center pt-[8vh] pb-16">{children}</main>
-      <footer className="pb-8 text-center text-xs text-meta">
-        Never miss a payment, and always know where your money goes.
+      <footer className="space-y-1.5 pb-8 text-center text-xs text-meta">
+        <p>Never miss a payment, and always know where your money goes.</p>
+        <p>
+          <Link
+            href="/privacy"
+            className="underline-offset-2 hover:text-foreground hover:underline"
+          >
+            Privacy
+          </Link>
+          {" · "}
+          <Link href="/terms" className="underline-offset-2 hover:text-foreground hover:underline">
+            Terms
+          </Link>
+        </p>
       </footer>
     </div>
   );
